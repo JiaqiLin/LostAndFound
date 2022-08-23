@@ -1,0 +1,13 @@
+<!--pages/home/itemDetail/itemDetail.wxml-->
+<cu-custom bgColor="bg-gradual-purple" isBack="{{true}}">
+  <view slot="content">物品详情</view>
+</cu-custom>
+<view class="margin-xl">
+  <swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+    <swiper-item wx:for="{{swiperList}}" wx:key>
+      <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+      <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+    </swiper-item>
+  </swiper>
+
+</view>

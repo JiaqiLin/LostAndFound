@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "home": "/pages/home/home/home",
+    "releaseItem": "/pages/releaseItem/releaseItem",
+    "individualCenter": "/pages/individualCenter/home/home"
+  }
+}
