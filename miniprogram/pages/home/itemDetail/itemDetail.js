@@ -1,5 +1,6 @@
 Page({
   data: {
+    ifShowSponsorInfo:false,
     cardCur: 0,
     swiperList: [{
       id: 0,
@@ -99,5 +100,15 @@ Page({
         swiperList: list
       })
     }
-  }
+  },
+  showSponsorInfo:function(e){
+    this.setData({
+      ifShowSponsorInfo:true
+    })
+  },
+  hideModal:function(e) {
+    this.setData({
+      ifShowSponsorInfo:false
+    })
+  },
 })

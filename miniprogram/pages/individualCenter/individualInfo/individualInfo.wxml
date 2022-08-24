@@ -1,2 +1,16 @@
 <!--pages/individualInfo/individualInfo.wxml-->
-<text>pages/individualInfo/individualInfo.wxml</text>
+<cu-custom bgColor="bg-gradual-grey" isBack="{{true}}">
+  <view slot="content">个人信息</view>
+</cu-custom>
+<form>
+	<view class="cu-form-group margin-top">
+		<view class="title">昵称</view>
+		<input></input>
+    <text class="cuIcon-write text-green"></text>
+	</view>
+	<view class="cu-form-group">
+		<view class="title">联系方式：</view>
+    <input></input>
+    <text class="cuIcon-write text-green"></text>
+	</view>
+</form>
