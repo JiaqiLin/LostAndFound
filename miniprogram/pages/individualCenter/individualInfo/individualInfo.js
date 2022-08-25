@@ -1,11 +1,49 @@
 // pages/individualInfo/individualInfo.js
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    userInfo: {
+      nickName: '',
+      contact: ''
+    }
 
+  },
+  _save() {
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'updateUserInfo',
+      // 传给云函数的参数
+      data: {
+        userInfo: this.data.userInfo
+      },
+    })
+      .then(res => {
+        wx.showToast({
+          title: '成功',
+        })
+      })
+      .catch(error => {
+        wx.showToast({
+          title: '失败',
+          icon: 'error'
+        })
+      })
+  },
+  changeNickName(e) {
+    this.setData({
+      'userInfo.nickName': e.detail.value
+    })
+    this._save()
+  },
+  changeContact(e) {
+    this.setData({
+      'userInfo.changeContact': e.detail.value
+    })
+    this._save()
   },
 
   /**
@@ -26,7 +64,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    wx.cloud.callFunction({
+      name: 'selectUserInfo'
+    }).then(res => {
+      console.log(res)
+    }).catch(error => {
+      console.log(error)
+      wx.showToast({
+        title: '失败',
+      })
+    })
   },
 
   /**

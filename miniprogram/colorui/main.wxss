@@ -2334,7 +2334,7 @@ button.icon.lg {
 .cu-card.article>.cu-item .content>image {
 	width: 240rpx;
 	height: 6.4em;
-	margin-right: 20rpx;
+	margin-left: 20rpx;
 	border-radius: 6rpx;
 }
 
@@ -2348,7 +2348,7 @@ button.icon.lg {
 .cu-card.article>.cu-item .content .text-content {
 	font-size: 28rpx;
 	color: #888;
-	height: 4.8em;
+	height: 6.4em;
 	overflow: hidden;
 }
 

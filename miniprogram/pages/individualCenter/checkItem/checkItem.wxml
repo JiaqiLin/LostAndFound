@@ -12,78 +12,38 @@
 </scroll-view>
 <!--未被认领-->
 <view wx:if="{{TabCur===0}}">
-  <view class="cu-card article ">
+  <view class="cu-card article">
     <view class="cu-item shadow">
-      <view class="title">
-        <view class="text-cut">无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。</view>
+      <view class="title flex justify-between">
+        <view class="text-cut">校园卡</view>
+        <text class="text-grey text-sm">2022.8.24 15:09</text>
       </view>
       <view class="content">
-        <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="aspectFill"></image>
+
         <view class="desc">
           <view class="text-content"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
-          <view class="flex justify-end">
-            <button class="cu-btn round bg-red sm">删除</button>
-          </view>
         </view>
-      </view>
-    </view>
-  </view>
-  <view class="cu-card article ">
-    <view class="cu-item shadow">
-      <view class="title">
-        <view class="text-cut">无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。</view>
-      </view>
-      <view class="content">
         <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="aspectFill"></image>
-        <view class="desc">
-          <view class="text-content"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
-          <view class="flex justify-end">
-            <button class="cu-btn round bg-red sm">删除</button>
-          </view>
-        </view>
+      </view>
+      <view class="flex justify-around margin-top">
+        <button class="cu-btn round line-red sm">删除</button>
       </view>
     </view>
   </view>
 </view>
 <!--已被认领-->
 <view wx:if="{{TabCur===1}}">
-  <view class="cu-card article ">
+  <view class="cu-card article">
     <view class="cu-item shadow">
-      <view class="title">
-        <view class="text-cut">无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。</view>
+      <view class="title flex justify-between">
+        <view class="text-cut">校园卡</view>
+        <text class="text-grey text-sm">2022.8.24 15:09</text>
       </view>
       <view class="content">
-        <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="aspectFill"></image>
         <view class="desc">
           <view class="text-content" style="height:6.4em;"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
         </view>
-      </view>
-      <view class="flex justify-around margin-top">
-        <view class="cu-capsule round">
-          <view class="cu-tag bg-blue ">
-            认领次数
-          </view>
-          <view class="cu-tag line-blue">
-            123
-          </view>
-        </view>
-        <button class="cu-btn round bg-green sm">成功认领</button>
-        <button class="cu-btn round bg-red sm">删除</button>
-      </view>
-    </view>
-  </view>
-  <view class="cu-card article ">
-    <view class="cu-item shadow">
-      <view class="title flex">
-        <view class="text-cut">无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。</view>
-
-      </view>
-      <view class="content">
         <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="aspectFill"></image>
-        <view class="desc">
-          <view class="text-content" style="height:6.4em;"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！
-          </view>
-        </view>
       </view>
       <view class="flex justify-around margin-top">
         <view class="cu-capsule round">
@@ -94,25 +54,25 @@
             123
           </view>
         </view>
-        <button class="cu-btn round bg-green sm">成功认领</button>
-        <button class="cu-btn round bg-red sm">删除</button>
+        <button class="cu-btn round line-green sm">成功认领</button>
+        <button class="cu-btn round line-red sm">删除</button>
       </view>
-
     </view>
   </view>
 </view>
 <!--已认领成功-->
 <view wx:if="{{TabCur===2}}">
-  <view class="cu-card article ">
+  <view class="cu-card article">
     <view class="cu-item shadow">
-      <view class="title">
-        <view class="text-cut">无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。</view>
+      <view class="title flex justify-between">
+        <view class="text-cut">校园卡</view>
+        <text class="text-grey text-sm">2022.8.24 15:09</text>
       </view>
       <view class="content">
-        <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="aspectFill"></image>
         <view class="desc">
-          <view class="text-content" style="height:6.4em;"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
+          <view class="text-content"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
         </view>
+        <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="aspectFill"></image>
       </view>
       <view class="flex justify-around margin-top">
         <view class="cu-capsule round">
@@ -123,34 +83,8 @@
             123
           </view>
         </view>
-        <button class="cu-btn round bg-green sm">未成功认领</button>
-        <button class="cu-btn round bg-red sm">删除</button>
-      </view>
-    </view>
-  </view>
-  <view class="cu-card article ">
-    <view class="cu-item shadow">
-      <view class="title flex">
-        <view class="text-cut">无意者 烈火焚身;以正义的烈火拔出黑暗。我有自己的正义，见证至高的烈火吧。</view>
-      </view>
-      <view class="content">
-        <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="aspectFill"></image>
-        <view class="desc">
-          <view class="text-content" style="height:6.4em;"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！
-          </view>
-        </view>
-      </view>
-      <view class="flex justify-around margin-top">
-        <view class="cu-capsule round">
-          <view class="cu-tag bg-blue ">
-            认领次数
-          </view>
-          <view class="cu-tag line-blue">
-            123
-          </view>
-        </view>
-        <button class="cu-btn round bg-green sm">未成功认领</button>
-        <button class="cu-btn round bg-red sm">删除</button>
+        <button class="cu-btn round line-green sm">未成功认领</button>
+        <button class="cu-btn round line-red sm">删除</button>
       </view>
     </view>
   </view>

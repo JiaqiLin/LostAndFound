@@ -60,3 +60,4 @@
     </view>
   </form>
 </view>
+<tabbar PageCur="releaseItem"></tabbar>

@@ -1,11 +1,12 @@
 // pages/individualCenter/individualCenter.js
+const app=getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+  userInfo:''
   },
 
   /**
@@ -26,7 +27,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    this.setData({
+      userInfo:app.globalData.userInfo
+    })
+    console.log
   },
 
   /**

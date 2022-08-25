@@ -1,8 +1,8 @@
 <!--pages/individualCenter/individualCenter.wxml-->
 <cu-custom bgColor="bg-gradual-grey"></cu-custom>
 <view class="flex align-center justify-center flex flex-direction ">
-  <view class="cu-avatar xl round margin" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view>
-  <view >微信名</view>
+  <view class="cu-avatar xl round margin" style="background-image:url({{userInfo.avatarUrl}});"></view>
+  <view >{{userInfo.nickName}}</view>
 </view>
 <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
   <view class="cu-item arrow">
@@ -18,3 +18,4 @@
     </navigator>
   </view>
 </view>
+<tabbar PageCur="individualCenter"></tabbar>
