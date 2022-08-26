@@ -8,6 +8,7 @@ exports.main = async (event, context) => {
   const { userInfo } = event
   const{OPENID}=cloud.getWXContext()
   console.log(OPENID)
+  let success
   await db.collection('userInformation').add({
     data: {
       _openid:OPENID,
@@ -15,12 +16,9 @@ exports.main = async (event, context) => {
       contact:userInfo.contact
     }
   }).then(res=>{
-    return  {
-      success:true
-    }
+      success=true
   }).catch(error=>{
-    return  {
-      success:false
-    }
+      success=false
   })
+  return success
 }

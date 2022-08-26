@@ -2,9 +2,12 @@
 <!-- <home wx:if="{{PageCur=='home'}}"></home>
 <releaseItem wx:if="{{PageCur=='releaseItem'}}"></releaseItem >
 <individualCenter wx:if="{{PageCur=='individualCenter'}}"></individualCenter> -->
-<block wx:if="{{!hasUserInfo}}">
+<!-- <block wx:if="{{!hasUserInfo}}">
       <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-    </block>
+</block> -->
+<block >
+      <navigator url="/pages/home/home/home"> 获取头像昵称 </navigator>
+</block>
 <!-- <view class="cu-bar tabbar bg-white shadow foot">
   <view class="action" bindtap="NavChange" data-cur="home">
     <view class='cuIcon-cu-image'>

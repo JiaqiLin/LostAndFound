@@ -41,7 +41,7 @@ Page({
   },
   changeContact(e) {
     this.setData({
-      'userInfo.changeContact': e.detail.value
+      'userInfo.contact': e.detail.value
     })
     this._save()
   },
@@ -65,9 +65,19 @@ Page({
    */
   onShow() {
     wx.cloud.callFunction({
-      name: 'selectUserInfo'
+      name: 'selectUserInfo',
     }).then(res => {
-      console.log(res)
+        if(res===null){
+          wx.showToast({
+            title: '失败',
+          })
+        }
+        else{
+          console.log(res.result)
+          this.setData({
+            userInfo:res.result
+          })
+        }
     }).catch(error => {
       console.log(error)
       wx.showToast({

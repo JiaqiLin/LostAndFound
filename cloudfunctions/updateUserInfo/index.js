@@ -8,6 +8,7 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   const {userInfo}=event
   const {OPENID} = cloud.getWXContext()
+  let success
   await db.collection('userInformation')
   .where({_openid: OPENID})
   .update({
@@ -16,14 +17,13 @@ exports.main = async (event, context) => {
       contact: userInfo.contact,
     }
   })
-  .then(res => {
-    return {
-      success:true
-    }
+  .then(res => { 
+      success=true
   })
   .catch(error=>{
     return {
-      success:false
+      success=false
     }
   })
+  return success
 }

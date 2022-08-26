@@ -6,15 +6,18 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   const {OPENID} = cloud.getWXContext()
-  db.collection('userInformation')
+  console.log(OPENID)
+  let userInfo
+  await db.collection('userInformation')
   .where({
     _openid:OPENID
   })
   .get()
   .then(res=>{
-    return {userInfo:res.data}
+    userInfo=res.data[0]
   })
   .catch(error=>{
-    return false
+    userInfo=null
   })
+  return userInfo
 }
