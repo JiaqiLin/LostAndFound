@@ -81,12 +81,10 @@ Page({
           filePath: filePath
         }))
     }
-     let val = await Promise.all(tasks)
-    console.log(val)
-    for (const { fileID } of val) {
+    let fileIDs = await Promise.all(tasks)
+    for (const { fileID } of fileIDs) {
       item.images.push(fileID)
     }
-    console.log(item)
     let res = await wx.cloud.callFunction({
       name: "insertItem",
       data: { item: item }

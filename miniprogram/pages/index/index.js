@@ -29,9 +29,12 @@ Page({
           wx.cloud.callFunction({
             // 云函数名称
             name: 'selectUserInfo',
-            // 传给云函数的参数
+            data:{
+              type:'self',
+              otherOpenid:''
+            }
           }).then(res => {
-            app.globalData.userInfo = res.result
+            app.globalData.userInfo = res.result.userInfo
           })
         })
         wx.navigateTo({
