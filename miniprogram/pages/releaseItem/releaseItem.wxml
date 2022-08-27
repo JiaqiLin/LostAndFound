@@ -3,19 +3,19 @@
   <view slot="content">发布失物招领信息</view>
 </cu-custom>
 <view>
-  <form>
+  <form bindsubmit="releaseItem">
     <view class="cu-form-group  margin-top-sm">
       <view class="title">物品名称<text class="text-red">*</text></view>
-      <input placeholder="请输入物品名称"></input>
+      <input placeholder="请输入物品名称" name="itemName" value="{{itemName}}"></input>
     </view>
     <view class="cu-form-group">
       <view class="title">拾取地址<text class="text-red">*</text></view>
-      <input placeholder="请输入拾取地址"></input>
+      <input  placeholder="请输入拾取地址" name="address" value="{{address}}"></input>
       <text class="cuIcon-locationfill text-orange"></text>
     </view>
     <view class="cu-form-group">
       <view class="title">拾取日期选择<text class="text-red">*</text></view>
-      <picker mode="date" value="{{date}}" start="2015-09-01" end="2020-09-01" bindchange="DateChange">
+      <picker mode="date" value="{{date}}" bindchange="DateChange" name="date">
         <view class="picker">
           {{date}}
         </view>
@@ -23,7 +23,7 @@
     </view>
     <view class="cu-form-group">
       <view class="title">拾取时间选择</view>
-      <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="TimeChange">
+      <picker mode="time" value="{{time}}" bindchange="TimeChange" name="time">
         <view class="picker">
           {{time}}
         </view>
@@ -31,7 +31,7 @@
     </view>
     <view class="cu-form-group align-start">
       <view class="title">描述</view>
-      <textarea maxlength="-1" bindinput="descriptionInput" placeholder="描述"></textarea>
+      <textarea maxlength="-1" bindinput="descriptionInput" placeholder="描述" name="description" value="{{description}}"></textarea>
     </view>
     <view class="cu-bar bg-white margin-top">
       <view class="action">

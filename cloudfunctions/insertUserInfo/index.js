@@ -13,7 +13,8 @@ exports.main = async (event, context) => {
     data: {
       _openid:OPENID,
       nickName:userInfo.nickName,
-      contact:userInfo.contact
+      contact:userInfo.contact,
+      avatarUrl:userInfo.avatarUrl
     }
   }).then(res=>{
       success=true

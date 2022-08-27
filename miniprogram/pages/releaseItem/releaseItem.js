@@ -1,19 +1,18 @@
 // pages/releaseItem/releaseItem.js
 const app = getApp();
+var util = require('../../utils/getDateTime.js');
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    StatusBar: app.globalData.StatusBar,
-    CustomBar: app.globalData.CustomBar,
+    itemName: '',
+    address: '',
     index: null,
     time: '',
     date: '',
     imgList: [],
-    modalName: null,
-    descriptionValue: '',
+    description: '',
   },
   TimeChange(e) {
     this.setData({
@@ -26,7 +25,7 @@ Page({
     })
   },
   ChooseImage() {
-    wx.chooseMedia({
+    wx.chooseImage({
       count: 4, //默认9
       sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album'], //从相册选择
@@ -55,19 +54,79 @@ Page({
       imgList: this.data.imgList
     })
   },
-  descriptionInput(e) {
-    this.setData({
-      descriptionValue: e.detail.value
+  releaseItem: async function (e) {
+    if (this.data.imgList.length === 0) {
+      wx.showToast({
+        title: '请上传物品图片',
+        icon: "none"
+      })
+      return;
+    }
+    const item = {
+      itemName: e.detail.value.itemName,
+      address: e.detail.value.address,
+      date: e.detail.value.date,
+      time: e.detail.value.time,
+      description: e.detail.value.description,
+      images: []
+    }
+    wx.showLoading({
+      title: '发布中',
     })
+    let tasks = []
+    for (const filePath of this.data.imgList) {
+      tasks.push(
+        wx.cloud.uploadFile({
+          cloudPath: this.calculateCloudPath(filePath),
+          filePath: filePath
+        }))
+    }
+     let val = await Promise.all(tasks)
+    console.log(val)
+    for (const { fileID } of val) {
+      item.images.push(fileID)
+    }
+    console.log(item)
+    let res = await wx.cloud.callFunction({
+      name: "insertItem",
+      data: { item: item }
+    })
+    wx.hideLoading()
+    if (res.result.success === true) {
+      this.setData({
+        itemName: '',
+        address: '',
+        index: null,
+        time: '',
+        date: '',
+        imgList: [],
+        description: ''
+      })
+      wx.redirectTo({
+        url: '/pages/home/home/home',
+      })
+    }
+    else {
+      wx.showToast({
+        title: '发布失败',
+        icon: 'error'
+      })
+      wx.cloud.deleteFile({
+        fileList: item.images
+      })
+    }
   },
-  releaseItem: function () {
-
+  calculateCloudPath(filePath) {
+    return `items/${app.globalData.userInfo._openid}/${Date.now()}-${(Math.random() * 1000).toFixed(0)}${filePath.match(/\.[^.]+?$/)[0]}`
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    this.setData({
+      time: util.formatTime(new Date(Date.now())),
+      date: util.formatDate(new Date(Date.now())),
+    })
   },
 
   /**

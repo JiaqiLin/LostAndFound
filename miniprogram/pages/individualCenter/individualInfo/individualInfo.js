@@ -1,5 +1,5 @@
 // pages/individualInfo/individualInfo.js
-
+const app=getApp()
 Page({
 
   /**
@@ -7,8 +7,6 @@ Page({
    */
   data: {
     userInfo: {
-      nickName: '',
-      contact: ''
     }
 
   },
@@ -25,6 +23,7 @@ Page({
         wx.showToast({
           title: '成功',
         })
+        app.globalData.userInfo=this.data.userInfo
       })
       .catch(error => {
         wx.showToast({
@@ -64,26 +63,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    wx.cloud.callFunction({
-      name: 'selectUserInfo',
-    }).then(res => {
-        if(res===null){
-          wx.showToast({
-            title: '失败',
-          })
-        }
-        else{
-          console.log(res.result)
-          this.setData({
-            userInfo:res.result
-          })
-        }
-    }).catch(error => {
-      console.log(error)
-      wx.showToast({
-        title: '失败',
-      })
-    })
+  this.setData({
+    userInfo:app.globalData.userInfo
+  })
   },
 
   /**
