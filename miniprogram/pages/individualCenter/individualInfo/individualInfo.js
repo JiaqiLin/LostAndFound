@@ -1,5 +1,5 @@
 // pages/individualInfo/individualInfo.js
-const app=getApp()
+const app = getApp()
 Page({
 
   /**
@@ -20,16 +20,18 @@ Page({
       },
     })
       .then(res => {
-        wx.showToast({
-          title: '成功',
-        })
-        app.globalData.userInfo=this.data.userInfo
-      })
-      .catch(error => {
-        wx.showToast({
-          title: '失败',
-          icon: 'error'
-        })
+        if (res.result.success) {
+          wx.showToast({
+            title: '修改成功',
+          })
+          app.globalData.userInfo = this.data.userInfo
+        }
+        else{
+          wx.showToast({
+            title: '修改失败',
+            icon: 'error'
+          })
+        }
       })
   },
   changeNickName(e) {
@@ -63,9 +65,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-  this.setData({
-    userInfo:app.globalData.userInfo
-  })
+    this.setData({
+      userInfo: app.globalData.userInfo
+    })
   },
 
   /**

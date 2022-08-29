@@ -2,13 +2,12 @@
 <cu-custom bgColor="bg-gradual-grey" isBack="{{true}}">
   <view slot="content">物品详情</view>
 </cu-custom>
-
+<swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+  <swiper-item wx:for="{{item.images}}">
+    <image src="{{item}}" mode="aspectFit"></image>
+  </swiper-item>
+</swiper>
 <view class="cu-list menu  card-menu margin-top">
-  <swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-    <swiper-item wx:for="{{item.images}}">
-      <image src="{{item}}" mode="aspectFill"></image>
-    </swiper-item>
-  </swiper>
   <view class="cu-form-group">
     <view class="title">物品名称：</view>
     <text>{{item.itemName}}</text>
@@ -28,18 +27,23 @@
   <view class="cu-form-group">
     <view class="title">发布时间：</view>
     <text>{{item.releaseTime}}</text>
-    <view class="cu-capsule round">
-      <view class="cu-tag bg-blue ">
-        认领次数
-      </view>
-      <view class="cu-tag line-blue">
-        123
-      </view>
-    </view>
+
   </view>
 </view>
+<!-- <view class="flex justify-center">
+  <view class="cu-capsule round">
+    <view class="cu-tag bg-blue ">
+      认领次数
+    </view>
+    <view class="cu-tag line-blue">
+      123
+    </view>
+  </view>
+</view> -->
 <view class="cu-bar btn-group margin">
-  <button class="cu-btn bg-green shadow-blur round lg " bindtap="showSponsorInfo" data-openid="{{item._openid}}">认领</button>
+
+  <button class="cu-btn bg-green shadow-blur round lg " bindtap="showSponsorInfo" style="padding-top:10rpx;display: block" data-openid="{{item._openid}}">
+    <view>认领</view><view class="text-sm">(认领次数：{{item.realizeTimes}}次)</view></button>
 </view>
 
 <view class="cu-modal {{ifShowSponsorInfo?'show':''}}">
@@ -50,7 +54,7 @@
         <text class="cuIcon-close text-red"></text>
       </view>
     </view>
-    <view >
+    <view>
       <view class="cu-form-group">
         <view class="title">昵称：</view>
         <text>{{sponsorInfo.nickName}}</text>

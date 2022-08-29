@@ -5,9 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    items:[]
+    items: []
   },
-  checkItemDetail:function(e){
+  checkItemDetail: function (e) {
     wx.navigateTo({
       url: `/pages/home/itemDetail/itemDetail?id=${e.currentTarget.dataset.id}`,
     })
@@ -34,12 +34,23 @@ Page({
       title: '加载中',
     })
     wx.cloud.callFunction({
-      name:'selectItem'
-    }).then(res=>{
-      this.setData({
-        items:res.result.items
-      })
-      wx.hideLoading()
+      name: 'selectItem',
+      data:{
+        type:'selectAll'
+      }
+    }).then(res => {
+      if (res.result.success) {
+        this.setData({
+          items: res.result.items
+        })
+        wx.hideLoading()
+      }
+      else {
+        wx.showToast({
+          title: '加载失败',
+        })
+      }
+
     })
   },
 

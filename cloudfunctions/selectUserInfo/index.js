@@ -5,16 +5,25 @@ const db = cloud.database()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { OPENID } = cloud.getWXContext()
-  const { type, otherOpenid } = event
-  console.log(OPENID)
-  let userInfo = (await db.collection('userInformation')
-    .where({
-      _openid: type === 'self' ? OPENID : otherOpenid
-    })
-    .get()).data[0]
-  return { 
-    userInfo,
-    success:true
+  try {
+    const { OPENID } = cloud.getWXContext()
+    const { type, otherOpenid } = event
+    console.log(OPENID)
+    let res = await db.collection('userInformation')
+      .where({
+        _openid: type === 'self' ? OPENID : otherOpenid
+      })
+      .get()
+    let userInfo = res.data[0]
+    return {
+      userInfo,
+      success: true
+    }
   }
+  catch (e) {
+    return {
+      success: false
+    }
+  }
+
 }

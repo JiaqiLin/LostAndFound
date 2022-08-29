@@ -6,58 +6,11 @@ const _ = db.command
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { type } = event
-  switch (type) {
-    case 'selectAll':
-      return selectAll(event, context)
-    case 'selectItemByID':
-      return selectItemByID(event, context)
-    case 'selectItemByOpenid':
-      return selectItemByOpenid(event, context)
-  }
-  
-
-
-}
-async function selectAll(event, context) {
   try {
-    const wxContext = cloud.getWXContext()
-    let res = await db.collection('item').where({ state: 0 }).get()
-    let items = res.data
-    return {
-      items,
-      success: true
-    }
-  }
-  catch (e) {
-    console.log(e)
-    return {
-      success: false
-    }
-  }  
-}
-async function selectItemByID(event, context){
-  try {
-    const { _id } = event
-    let res = await db.collection('item').doc(_id).get()
-    let item = res.data
-    return {
-      success: true,
-      item
-    }
-  }
-  catch (e) {
-    return {
-      success: false
-    }
-  }
-}
-async function selectItemByOpenid(event, context){
-  try {
-    const { state } = event
+    const { type } = event
     const { OPENID } = cloud.getWXContext()
     let res
-    switch (state) {
+    switch (type) {
       case 0:
         res = await db.collection('item')
           .where({
@@ -97,4 +50,3 @@ async function selectItemByOpenid(event, context){
     }
   }
 }
-

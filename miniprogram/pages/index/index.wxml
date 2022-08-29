@@ -1,10 +1,18 @@
 <!--index.wxml-->
-<!-- <home wx:if="{{PageCur=='home'}}"></home>
-<releaseItem wx:if="{{PageCur=='releaseItem'}}"></releaseItem >
-<individualCenter wx:if="{{PageCur=='individualCenter'}}"></individualCenter> -->
-<block wx:if="{{!hasUserInfo}}">
-      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
+<cu-custom bgColor="bg-white">
+  <view slot="content">失物招领小程序</view>
+</cu-custom>
+<view class="margin-xl padding-xl bg-white radius shadow shadow-lg">
+  <view class="flex justify-center">
+    <block wx:if="{{!hasUserInfo}}">
+      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile" class='cu-btn round bg-green shadow'> 获取头像昵称 </button>
 </block>
+  </view>
+</view>
+<view class="text-center margin-top">
+  <text class="text-grey text-xl">欢迎使用失物招领小程序</text>
+</view>
+
 <!-- <block >
       <navigator url="/pages/home/home/home"> 获取头像昵称 </navigator>
 </block> -->

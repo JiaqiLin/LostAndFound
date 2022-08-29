@@ -12,143 +12,99 @@
 </scroll-view>
 <!--未被认领-->
 <view wx:if="{{TabCur===0}}">
-  <view class="cu-card article">
+  <view wx:for="{{unrealizedItems}}" wx:key="_id" data-id="{{item._id}}" class="cu-card article" bindtap="checkItemDetail">
     <view class="cu-item shadow">
       <view class="title flex justify-between">
-        <view class="text-cut">校园卡</view>
-        <text class="text-grey text-sm">2022.8.24 15:09</text>
-      </view>
-      <view class="content">
-
-        <view class="desc">
-          <view class="text-content"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
+          <view class="text-cut">{{item.itemName}}</view>
+          <text class="text-grey text-sm">{{item.releaseTime}}</text>
         </view>
-        <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="aspectFill"></image>
-      </view>
+        <view class="content">
+          <view class="desc">
+            <view class="text-content">
+              <view style="word-break: break-all;">
+                <text class="text-black">地点：</text>{{item.address}}
+              </view>
+              <view class="margin-top">
+                <text class="text-black">时间：</text>{{item.date}} {{item.time}}
+              </view>
+            </view>
+          </view>
+          <image src="{{item.images[0]}}" mode="aspectFill"></image>
+        </view>
       <view class="flex justify-around margin-top">
-        <button class="cu-btn round line-red sm">删除</button>
+        <button class="cu-btn round line-red sm" catchtap="deleteItem" data-id="{{item._id}}">删除</button>
       </view>
     </view>
   </view>
 </view>
 <!--已被认领-->
 <view wx:if="{{TabCur===1}}">
-  <view class="cu-card article">
+  <view wx:for="{{realizedItems}}" wx:key="_id" data-id="{{item._id}}" class="cu-card article" bindtap="checkItemDetail" >
     <view class="cu-item shadow">
       <view class="title flex justify-between">
-        <view class="text-cut">校园卡</view>
-        <text class="text-grey text-sm">2022.8.24 15:09</text>
-      </view>
-      <view class="content">
-        <view class="desc">
-          <view class="text-content" style="height:6.4em;"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
+          <view class="text-cut">{{item.itemName}}</view>
+          <text class="text-grey text-sm">{{item.releaseTime}}</text>
         </view>
-        <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="aspectFill"></image>
-      </view>
+        <view class="content">
+          <view class="desc">
+            <view class="text-content">
+              <view style="word-break: break-all;">
+                <text class="text-black">地点：</text>{{item.address}}
+              </view>
+              <view class="margin-top">
+                <text class="text-black">时间：</text>{{item.date}} {{item.time}}
+              </view>
+            </view>
+          </view>
+          <image src="{{item.images[0]}}" mode="aspectFill"></image>
+        </view>
       <view class="flex justify-around margin-top">
         <view class="cu-capsule round">
           <view class="cu-tag bg-blue ">
             认领次数
           </view>
           <view class="cu-tag line-blue">
-            123
+            {{item.realizeTimes}}
           </view>
         </view>
-        <button class="cu-btn round line-green sm">成功认领</button>
-        <button class="cu-btn round line-red sm">删除</button>
+        <button class="cu-btn round line-green sm" catchtap="successRealizedItem" data-id="{{item._id}}">成功认领</button>
+        <button class="cu-btn round line-red sm" catchtap="deleteItem" data-id="{{item._id}}">删除</button>
       </view>
     </view>
   </view>
 </view>
 <!--已认领成功-->
 <view wx:if="{{TabCur===2}}">
-  <view class="cu-card article">
+  <view wx:for="{{successRealizedItems}}" wx:key="_id" data-id="{{item._id}}" class="cu-card article" bindtap="checkItemDetail">
     <view class="cu-item shadow">
       <view class="title flex justify-between">
-        <view class="text-cut">校园卡</view>
-        <text class="text-grey text-sm">2022.8.24 15:09</text>
-      </view>
-      <view class="content">
-        <view class="desc">
-          <view class="text-content"> 折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！真正的恩典因不完整而美丽，因情感而真诚，因脆弱而自由！</view>
+          <view class="text-cut">{{item.itemName}}</view>
+          <text class="text-grey text-sm">{{item.releaseTime}}</text>
         </view>
-        <image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode="aspectFill"></image>
-      </view>
+        <view class="content">
+          <view class="desc">
+            <view class="text-content">
+              <view style="word-break: break-all;">
+                <text class="text-black">地点：</text>{{item.address}}
+              </view>
+              <view class="margin-top">
+                <text class="text-black">时间：</text>{{item.date}} {{item.time}}
+              </view>
+            </view>
+          </view>
+          <image src="{{item.images[0]}}" mode="aspectFill"></image>
+        </view>
       <view class="flex justify-around margin-top">
         <view class="cu-capsule round">
           <view class="cu-tag bg-blue ">
             认领次数
           </view>
           <view class="cu-tag line-blue">
-            123
+            {{item.realizeTimes}}
           </view>
         </view>
-        <button class="cu-btn round line-green sm">未成功认领</button>
-        <button class="cu-btn round line-red sm">删除</button>
-      </view>
-    </view>
-  </view>
-</view>
-<!--确认删除模态框-->
-<view class="cu-modal {{modalName=='DeleteDialogModal'?'show':''}}">
-  <view class="cu-dialog">
-    <view class="cu-bar bg-white justify-end">
-      <view class="content">删除物品</view>
-      <view class="action" bindtap="hideModal">
-        <text class="cuIcon-close text-red"></text>
-      </view>
-    </view>
-    <view class="padding-xl">
-      确认删除该物品吗？删除后将无法撤销。
-    </view>
-    <view class="cu-bar bg-white justify-end">
-      <view class="action">
-        <button class="cu-btn bg-green margin-left" bindtap="hideModal">确定</button>
-        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
-
-
-      </view>
-    </view>
-  </view>
-</view>
-<!--确认成功认领模态框-->
-<view class="cu-modal {{modalName=='successClaimDialogModal'?'show':''}}">
-  <view class="cu-dialog">
-    <view class="cu-bar bg-white justify-end">
-      <view class="content">确认成功认领</view>
-      <view class="action" bindtap="hideModal">
-        <text class="cuIcon-close text-red"></text>
-      </view>
-    </view>
-    <view class="padding-xl">
-      确认设定该物品为成功认领吗？
-    </view>
-    <view class="cu-bar bg-white justify-end">
-      <view class="action">
-        <button class="cu-btn bg-green margin-left" bindtap="hideModal">确定</button>
-        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
-
-      </view>
-    </view>
-  </view>
-</view>
-<!--确认未成功认领模态框-->
-<view class="cu-modal {{modalName=='failClaimDialogModal'?'show':''}}">
-  <view class="cu-dialog">
-    <view class="cu-bar bg-white justify-end">
-      <view class="content">确认未成功认领</view>
-      <view class="action" bindtap="hideModal">
-        <text class="cuIcon-close text-red"></text>
-      </view>
-    </view>
-    <view class="padding-xl">
-      确认设定该物品为未成功认领吗？
-    </view>
-    <view class="cu-bar bg-white justify-center">
-      <view class="action">
-        <button class="cu-btn bg-green margin-left" bindtap="hideModal">确定</button>
-        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
-
+        <button class="cu-btn round line-green sm" catchtap="unsuccessRealizedItem" data-id="{{item._id}}">未成功认领</button>
+        <button class="cu-btn round line-red sm" catchtap="deleteItem" data-id="{{item._id}}">删除</button>
       </view>
     </view>
   </view>

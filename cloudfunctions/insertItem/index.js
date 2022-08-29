@@ -4,9 +4,9 @@ cloud.init({env: 'cloud1-0g2tfyd1faa9440f'})
 const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
+  try{
     const { item } = event
     const { OPENID } = cloud.getWXContext()
-    console.log(item)
     await db.collection('item').add({
       data: {
         _openid: OPENID,
@@ -16,14 +16,21 @@ exports.main = async (event, context) => {
         date: item.date,
         description: item.description,
         images: item.images,
-        releaseTime: formatTime(new Date(Date.now()))
+        releaseTime: formatTime(new Date(Date.now())),
+        state:0,
+        realizeTimes:0
       }
-    }).catch(error=>{
-      console.log(error)
     })
     return {
       success: true
-    }
+    }    
+  }
+  catch(e){
+    return {
+      success: false
+    } 
+  }
+
 }
 const formatTime = date => {
   const year = date.getFullYear()
