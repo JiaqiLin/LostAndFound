@@ -2,16 +2,26 @@
 <cu-custom bgColor="bg-white">
 </cu-custom>
 <scroll-view scroll-y class="scrollPage">
-  <view class="cu-bar search bg-white">
-    <view class="search-form round">
-      <text class="cuIcon-search"></text>
-      <input type="text" placeholder="搜索失物招领信息" confirm-type="search"></input>
+  <form bindsubmit="searchItem">
+    <view class="cu-bar search bg-white fixed" style="top:120rpx">
+      <view class="search-form round">
+        <text class="cuIcon-search"></text>
+        <input type="text" placeholder="搜索失物招领信息" confirm-type="search" value="{{searchKey}}" name="searchKey"></input>
+      </view>
+      <view class="action">
+        <button class="cu-btn bg-green shadow-blur round" formType="submit">搜索</button>
+      </view>
     </view>
-    <view class="action">
-      <button class="cu-btn bg-green shadow-blur round">搜索</button>
-    </view>
+  </form>
+  <view class="nav bg-white fixed flex justify-end text-sm" style="top:220rpx">
+      <picker mode="date" value="{{date}}" bindchange="TimeChange" name="date" class="margin-sm">
+        <view class="picker">
+          <text class="cuIcon-sort text-gray">拾取日期  {{date}}</text>
+        </view>
+      </picker>
   </view>
-  <view class="margin">
+
+  <view class="margin" style="margin-top: 200rpx;">
     <view wx:for="{{items}}" wx:key="_id" data-id="{{item._id}}" class="cu-card article" bindtap="checkItemDetail">
       <view class="cu-item shadow">
         <view class="title flex justify-between">

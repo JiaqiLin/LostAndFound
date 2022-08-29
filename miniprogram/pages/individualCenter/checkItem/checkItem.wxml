@@ -5,7 +5,7 @@
 </cu-custom>
 <scroll-view scroll-x class="bg-gradual-grey nav">
   <view class="flex text-center">
-    <view class="cu-item flex-sub {{index==TabCur?'text-green cur':''}}" wx:for="{{TabName}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+    <view class="cu-item flex-sub {{index==TabCur?'text-green cur':''}}" wx:for="{{TabName}}" wx:key="*this" bindtap="tabSelect" data-id="{{index}}">
       {{item}}
     </view>
   </view>

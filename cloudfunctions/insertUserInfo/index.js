@@ -8,14 +8,19 @@ exports.main = async (event, context) => {
   try {
     const { userInfo } = event
     const { OPENID } = cloud.getWXContext()
-    await db.collection('userInformation').add({
-      data: {
-        _openid: OPENID,
-        nickName: userInfo.nickName,
-        contact: userInfo.contact,
-        avatarUrl: userInfo.avatarUrl
-      }
-    })
+    let res = await db.collection('userInformation').where({
+      _openid: OPENID
+    }).get()
+    if (!res.data) {
+      await db.collection('userInformation').add({
+        data: {
+          _openid: OPENID,
+          nickName: userInfo.nickName,
+          contact: userInfo.contact,
+          avatarUrl: userInfo.avatarUrl
+        }
+      })
+    }
     return { success: true }
   }
   catch (e) {

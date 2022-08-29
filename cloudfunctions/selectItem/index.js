@@ -14,8 +14,12 @@ exports.main = async (event, context) => {
       return selectItemByID(event, context)
     case 'selectItemByOpenid':
       return selectItemByOpenid(event, context)
+    case 'selectItemBySearchKey':
+      return selectItemBySearchKey(event, context)
+    case 'selectItemByDate':
+      return selectItemByDate(event, context)
   }
-  
+
 
 
 }
@@ -34,9 +38,9 @@ async function selectAll(event, context) {
     return {
       success: false
     }
-  }  
+  }
 }
-async function selectItemByID(event, context){
+async function selectItemByID(event, context) {
   try {
     const { _id } = event
     let res = await db.collection('item').doc(_id).get()
@@ -52,7 +56,7 @@ async function selectItemByID(event, context){
     }
   }
 }
-async function selectItemByOpenid(event, context){
+async function selectItemByOpenid(event, context) {
   try {
     const { state } = event
     const { OPENID } = cloud.getWXContext()
@@ -61,7 +65,7 @@ async function selectItemByOpenid(event, context){
       case 0:
         res = await db.collection('item')
           .where({
-            _openid:OPENID,
+            _openid: OPENID,
             state: 0,
             realizeTimes: 0
           })
@@ -70,16 +74,16 @@ async function selectItemByOpenid(event, context){
       case 1:
         res = await db.collection('item')
           .where({
-            _openid:OPENID,
-            state:0,
-            realizeTimes:_.gt(0)
+            _openid: OPENID,
+            state: 0,
+            realizeTimes: _.gt(0)
           })
           .get()
         break;
       case 2:
         res = await db.collection('item')
           .where({
-            _openid:OPENID,
+            _openid: OPENID,
             state: 1
           })
           .get()
@@ -89,6 +93,66 @@ async function selectItemByOpenid(event, context){
     return {
       success: true,
       items
+    }
+  }
+  catch (e) {
+    return {
+      success: false
+    }
+  }
+}
+async function selectItemBySearchKey(event, context) {
+  try {
+    const { searchKey } = event
+    let res
+    if (searchKey === '') {
+      res = await db.collection('item').where({ state: 0 }).get()
+    }
+    else {
+      res = await db.collection('item')
+        .where(_.or([
+          {
+            itemName: db.RegExp({
+              regexp: searchKey,
+              options: 'i',
+            })
+          },
+          {
+            address: db.RegExp({
+              regexp: searchKey,
+              options: 'i',
+            })
+          },
+          {
+            description: db.RegExp({
+              regexp: searchKey,
+              options: 'i',
+            })
+          }]).and([{ state: 0 }]))
+        .get()
+    }
+    let items = res.data
+    return {
+      success: true,
+      items
+    }
+  }
+  catch (e) {
+    return {
+      success: false,
+    }
+  }
+}
+async function selectItemByDate(event, context) {
+  try {
+    const { date } = event
+    let res = await db.collection('item')
+      .where(_.and([{ state: 0 },{date:date}]))
+      .get()
+    let items = res.data
+    return {
+      items,
+      success: true
     }
   }
   catch (e) {
