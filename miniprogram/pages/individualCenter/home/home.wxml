@@ -17,11 +17,11 @@
       <text class="text-grey">我发布的失物招领</text>
     </navigator>
   </view>
-  <view class="cu-item arrow">
+  <!-- <view class="cu-item arrow">
     <button class="content" bindtap="exit">
       <text class="cuIcon-exit text-green"></text>
       <text class="text-grey">注销（测试使用，清除本地缓存）</text>
     </button>
-  </view>
+  </view> -->
 </view>
 <tabbar PageCur="individualCenter"></tabbar>

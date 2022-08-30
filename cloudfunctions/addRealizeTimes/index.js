@@ -12,7 +12,7 @@ exports.main = async (event, context) => {
     const result = await db.runTransaction(async transaction => {
       const res = await transaction.collection('item').doc(_id).get()
       if (res.data) {
-        const updateItem = await transaction.collection('item').doc(_id).update({
+        await transaction.collection('item').doc(_id).update({
           data: {
             realizeTimes: _.inc(1)
           }

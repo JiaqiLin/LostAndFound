@@ -22,7 +22,7 @@ Page({
       searchKey: ''
     })
     wx.showLoading({
-      title: '获取失物信息中',
+      title: '获取物品信息中',
     })
     //通过日期检索失物
     wx.cloud.callFunction({
@@ -78,7 +78,7 @@ Page({
    */
   loadItems() {
     wx.showLoading({
-      title: '获取失物信息中',
+      title: '获取物品信息中',
     })
     wx.cloud.callFunction({
       name: 'selectItem',

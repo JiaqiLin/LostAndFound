@@ -36,20 +36,23 @@ Page({
           wx.cloud.callFunction({
             // 云函数名称
             name: 'selectUserInfo',
-            data:{
-              type:'self',
-              otherOpenid:''
+            data: {
+              type: 'self',
+              otherOpenid: ''
             }
           }).then(res => {
-            console.log(res)
             //将含有openid的用户信息保存至缓存中
             wx.setStorageSync('userInfo', res.result.userInfo)
+            wx.showLoading({
+              title: '登录中',
+            })
+            // 跳转到首页
+            wx.navigateTo({
+              url: '../home/home/home'
+            })
           })
         })
-        // 跳转到首页
-        wx.navigateTo({
-          url: '../home/home/home'  
-        })
+
       }
     })
   },
@@ -61,12 +64,12 @@ Page({
   // 当我们登录完退出再次进入，为了避免再次点击登录按钮多次获取用户信息的情况，如果后台userInfo信息存在，直接进入登录页面，无需再次登录进行获取
   onShow() {
     //获取缓存中的用户信息
-    let n = wx.getStorageSync('userInfo')===''?null:wx.getStorageSync('userInfo')
+    let n = wx.getStorageSync('userInfo') === '' ? null : wx.getStorageSync('userInfo')
     //当本地缓存的用户名称不为""或者null时，跳转首页
     if (n !== null && n.nickName != '' && n.nickName != null) {
       // 跳转到首页
       wx.navigateTo({
-        url: '../home/home/home'  
+        url: '../home/home/home'
       })
     }
   }

@@ -3,7 +3,7 @@
   <view slot="content">物品详情</view>
 </cu-custom>
 <swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-  <swiper-item wx:for="{{item.images}}" bindtap="ViewImage" data-url="{{item}}">
+  <swiper-item wx:for="{{item.images}}" wx:key="*this" bindtap="ViewImage" data-url="{{item}}">
     <image src="{{item}}" mode="aspectFit" ></image>
   </swiper-item>
 </swiper>
