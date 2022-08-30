@@ -1,26 +1,35 @@
+
 // pages/home/home.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    items: [],
-    searchKey: '',
-    date:''
+    CustomBar: app.globalData.CustomBar, //头顶导航的宽度
+    items: [],  //物品列表
+    searchKey: '',  //查询关键字
+    date: ''  //拾取日期
   },
-  TimeChange:function (e) {
+  /**
+   * 选择拾取日期
+   * @param {*} e 
+   */
+  TimeChange: function (e) {
     this.setData({
-      date:e.detail.value
+      date: e.detail.value,
+      searchKey: ''
     })
     wx.showLoading({
       title: '获取失物信息中',
     })
+    //通过日期检索失物
     wx.cloud.callFunction({
       name: 'selectItem',
       data: {
         type: 'selectItemByDate',
-        date:this.data.date
+        date: this.data.date
       }
     }).then(res => {
       if (res.result.success) {
@@ -28,6 +37,7 @@ Page({
           items: res.result.items
         })
         wx.hideLoading()
+        //没检索到
         if (res.result.items.length === 0) {
           wx.showToast({
             title: '暂无结果',
@@ -36,25 +46,36 @@ Page({
         }
       }
       else {
-        console.log(res)
         wx.showToast({
           title: '获取失败',
           icon: 'error'
         })
       }
-    })
+    }).catch(error => { console.log(error) })
   },
+  /**
+   * 点击物品跳转
+   * @param {*} e 
+   */
   checkItemDetail: function (e) {
     wx.navigateTo({
       url: `/pages/home/itemDetail/itemDetail?id=${e.currentTarget.dataset.id}`,
     })
   },
+  /**
+   * 关键字查询物品
+   * @param {*} e 
+   */
   searchItem(e) {
     this.setData({
-      searchKey: e.detail.value.searchKey
+      searchKey: e.detail.value.searchKey,
+      date: ''
     })
     this.loadItems()
   },
+  /**
+   * 加载物品
+   */
   loadItems() {
     wx.showLoading({
       title: '获取失物信息中',
@@ -71,6 +92,7 @@ Page({
           items: res.result.items
         })
         wx.hideLoading()
+        //未查询到
         if (res.result.items.length === 0) {
           wx.showToast({
             title: '暂无结果',
@@ -79,13 +101,14 @@ Page({
         }
       }
       else {
-        console.log(res)
         wx.showToast({
           title: '获取失败',
           icon: 'error'
         })
       }
 
+    }).catch(error => {
+      console.log(error)
     })
   },
   /**

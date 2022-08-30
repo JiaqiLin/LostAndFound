@@ -1,22 +1,39 @@
 // pages/individualCenter/checkItem/checkItem.js
 
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    TabCur: 0,
-    scrollLeft: 0,
-    TabName: ['未被认领', '已被认领', '已认领成功'],
+    TabCur: 0,  //导航编号
+    scrollLeft: 0,  //点击效果参数
+    TabName: ['未被认领', '已被认领', '已认领成功'], //导航栏内容
   },
+  /**
+   * 改变导航
+   * @param {*} e 
+   */
   tabSelect(e) {
     this.setData({
       TabCur: e.currentTarget.dataset.id,
       scrollLeft: (e.currentTarget.dataset.id - 1) * 60
     })
+    //重新加载
     this.loadItems()
   },
+  /**
+   * 点击物品，跳转详情页
+   * @param {*} e 
+   */
+  checkItemDetail: function (e) {
+    wx.navigateTo({
+      url: `/pages/home/itemDetail/itemDetail?id=${e.currentTarget.dataset.id}`,
+    })
+  },
+  /**
+   * 点击删除
+   * @param {*} e 
+   */
   deleteItem(e) {
     let that=this
     wx.showModal({
@@ -35,6 +52,7 @@ Page({
                 title: '删除成功',
                 icon: 'success'
               })
+              //重新加载
               that.loadItems()
             }
             else {
@@ -62,12 +80,12 @@ Page({
               _id: e.currentTarget.dataset.id
             }
           }).then(res => {
-            console.log(res)
             if (res.result.success) {
               wx.showToast({
                 title: '已修改成功认领',
                 icon: 'success'
               })
+              //重新加载
               that.loadItems()
             }
             else {
@@ -100,6 +118,7 @@ Page({
                 title: '已修改未成功认领',
                 icon: 'success'
               })
+              //重新加载
               that.loadItems()
             }
             else {
@@ -114,9 +133,12 @@ Page({
     })
 
   },
+  /**
+   * 查询用户发布的物品
+   */
   loadItems() {
     wx.showLoading({
-      title: '加载中',
+      title: '获取物品中',
     })
     wx.cloud.callFunction({
       name: 'selectItem',
@@ -125,7 +147,7 @@ Page({
         type: 'selectItemByOpenid'
       }
     }).then(res => {
-      if (res.result.success === true) {
+      if (res.result.success) {
         switch (this.data.TabCur) {
           case 0:
             this.setData({ unrealizedItems: res.result.items })
@@ -141,7 +163,7 @@ Page({
       }
       else {
         wx.showToast({
-          title: '加载失败',
+          title: '获取失败',
           icon: 'error'
         })
       }
@@ -152,7 +174,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
+  onLoad() {
     this.loadItems()
   },
 

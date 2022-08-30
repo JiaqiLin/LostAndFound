@@ -8,7 +8,6 @@ exports.main = async (event, context) => {
   try {
     const { OPENID } = cloud.getWXContext()
     const { type, otherOpenid } = event
-    console.log(OPENID)
     let res = await db.collection('userInformation')
       .where({
         _openid: type === 'self' ? OPENID : otherOpenid

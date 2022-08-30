@@ -6,27 +6,38 @@ Page({
    * 页面的初始数据
    */
   data: {
-    itemName: '',
-    address: '',
-    index: null,
-    time: '',
-    date: '',
-    imgList: [],
-    description: '',
+    itemName: '',  //物品名称
+    address: '',  //拾取地址
+    index: null,  //用于显示图片
+    time: '',  //拾取时间
+    date: '',  //拾取日期
+    imgList: [],  //图片临时url
+    description: '',  //物品描述
   },
+  /**
+   * 改变时间
+   * @param {*} e 
+   */
   TimeChange(e) {
     this.setData({
       time: e.detail.value
     })
   },
+  /**
+   * 改变日期
+   * @param {*} e 
+   */
   DateChange(e) {
     this.setData({
       date: e.detail.value
     })
   },
+  /**
+   * 选择图片
+   */
   ChooseImage() {
     wx.chooseImage({
-      count: 4, //默认9
+      count: 9, //默认9
       sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album'], //从相册选择
       success: (res) => {
@@ -42,18 +53,30 @@ Page({
       }
     });
   },
+  /**
+   * 查看大图
+   * @param {*} e 
+   */
   ViewImage(e) {
     wx.previewImage({
       urls: this.data.imgList,
       current: e.currentTarget.dataset.url
     });
   },
+  /**
+   * 删除图片
+   * @param {*} e 
+   */
   DelImg(e) {
     this.data.imgList.splice(e.currentTarget.dataset.index, 1);
     this.setData({
       imgList: this.data.imgList
     })
   },
+  /**
+   * 点击发布
+   * @param {*} e 
+   */
   releaseItem: function (e) {
     //获取用户输入信息
     const item = {
@@ -81,7 +104,7 @@ Page({
       return;
     }
     //检查用户是否填写个人信息
-    if (app.globalData.userInfo.contact === '') {
+    if (wx.getStorageSync('userInfo').contact === '') {
       wx.showModal({
         title: '提示',
         content: '请前往个人中心->个人信息，填写联系方式',
@@ -92,7 +115,6 @@ Page({
             })
           } 
         }
-
       })
       return
     }
@@ -170,13 +192,18 @@ Page({
 
 
   },
+  /**
+   * 计算图片云存储路径
+   * @param {*} filePath 
+   */
   calculateCloudPath(filePath) {
-    return `items/${app.globalData.userInfo._openid}/${Date.now()}-${(Math.random() * 1000).toFixed(0)}${filePath.match(/\.[^.]+?$/)[0]}`
+    return `items/${wx.getStorageSync('userInfo')._openid}/${Date.now()}-${(Math.random() * 1000).toFixed(0)}${filePath.match(/\.[^.]+?$/)[0]}`
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    //设置当前日期时间
     this.setData({
       time: util.formatTime(new Date(Date.now())),
       date: util.formatDate(new Date(Date.now())),

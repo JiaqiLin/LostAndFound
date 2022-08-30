@@ -2374,7 +2374,6 @@ button.icon.lg {
 	padding-right: 30rpx;
 	font-size: 30rpx;
 	position: relative;
-	height: 60rpx;
 	line-height: 60rpx;
 }
 

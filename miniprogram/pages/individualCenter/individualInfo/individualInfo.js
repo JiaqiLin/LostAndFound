@@ -6,15 +6,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {
-    }
+    userInfo: {}
 
   },
+  /**
+   * 保存用户信息
+   */
   _save() {
     wx.cloud.callFunction({
-      // 云函数名称
       name: 'updateUserInfo',
-      // 传给云函数的参数
       data: {
         userInfo: this.data.userInfo
       },
@@ -24,9 +24,10 @@ Page({
           wx.showToast({
             title: '修改成功',
           })
-          app.globalData.userInfo = this.data.userInfo
+          //修改缓存中的用户信息
+          wx.setStorageSync('userInfo',this.data.userInfo)
         }
-        else{
+        else {
           wx.showToast({
             title: '修改失败',
             icon: 'error'
@@ -34,16 +35,26 @@ Page({
         }
       })
   },
+  /**
+   * 修改昵称
+   * @param {*} e 
+   */
   changeNickName(e) {
     this.setData({
       'userInfo.nickName': e.detail.value
     })
+    //保存
     this._save()
   },
+  /**
+   * 修改联系方式
+   * @param {*} e 
+   */
   changeContact(e) {
     this.setData({
       'userInfo.contact': e.detail.value
     })
+    //保存
     this._save()
   },
 
@@ -65,8 +76,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    //载入缓存中的用户信息
     this.setData({
-      userInfo: app.globalData.userInfo
+      userInfo: wx.getStorageSync('userInfo')
     })
   },
 

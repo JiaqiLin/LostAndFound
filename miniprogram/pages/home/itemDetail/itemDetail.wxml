@@ -3,8 +3,8 @@
   <view slot="content">物品详情</view>
 </cu-custom>
 <swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-  <swiper-item wx:for="{{item.images}}">
-    <image src="{{item}}" mode="aspectFit"></image>
+  <swiper-item wx:for="{{item.images}}" bindtap="ViewImage" data-url="{{item}}">
+    <image src="{{item}}" mode="aspectFit" ></image>
   </swiper-item>
 </swiper>
 <view class="cu-list menu  card-menu margin-top">
@@ -20,9 +20,9 @@
     <view class="title">拾取时间：</view>
     <text>{{item.date}} {{item.time}}</text>
   </view>
-  <view class="cu-form-group align-start">
-    <view class="title">描述：</view>
-    <textarea maxlength="-1" disabled="true" bindinput="textareaBInput">{{item.description}}</textarea>
+  <view class="cu-form-group" >
+    <view class="title" >描述：</view>
+    <text >{{item.description}}</text>
   </view>
   <view class="cu-form-group">
     <view class="title">发布时间：</view>

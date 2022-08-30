@@ -1,14 +1,29 @@
 // pages/individualCenter/individualCenter.js
-const app=getApp()
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  userInfo:''
+    userInfo: '' //用户信息
   },
 
+  exit() {
+    wx.showModal({
+      title: '提示',
+      content: '是否登出？',
+      success(res) {
+        if (res.confirm) {
+          wx.removeStorageSync('userInfo')
+          wx.redirectTo({
+            url: '/pages/index/index',
+          })
+        }
+
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -27,10 +42,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    //获取缓存中的用户信息
     this.setData({
-      userInfo:app.globalData.userInfo
+      userInfo: wx.getStorageSync('userInfo')
     })
-    console.log
   },
 
   /**

@@ -2,9 +2,10 @@
 <cu-custom bgColor="bg-gradual-grey">
   <view slot="content">发布失物招领信息</view>
 </cu-custom>
+<scroll-view scroll-y class="scrollPage">
 <view>
   <form bindsubmit="releaseItem">
-    <view class="cu-form-group  margin-top-sm">
+    <view class="cu-form-group  margin-top ">
       <view class="title">物品名称<text class="text-red">*</text></view>
       <input placeholder="请输入物品名称" name="itemName" value="{{itemName}}"></input>
     </view>
@@ -38,7 +39,7 @@
         图片上传<text class="text-red">*</text>
       </view>
       <view class="action">
-        {{imgList.length}}/4
+        {{imgList.length}}/9
       </view>
     </view>
     <view class="cu-form-group">
@@ -60,4 +61,6 @@
     </view>
   </form>
 </view>
+<view class='cu-tabbar-height'></view>
+</scroll-view>
 <tabbar PageCur="releaseItem"></tabbar>

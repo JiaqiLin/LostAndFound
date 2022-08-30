@@ -2,19 +2,19 @@
 <view class="cu-bar tabbar bg-white shadow foot">
   <view class="action" bindtap="NavChange" data-cur="home">
     <view class='cuIcon-cu-image'>
-      <image src="/images/tabbar/basics{{PageCur=='home'?'_cur':''}}.png"></image>
+      <text class="cuIcon-home {{PageCur=='home'?'text-green':'text-grey'}}"></text>
     </view>
     <view class="{{PageCur=='home'?'text-green':'text-gray'}}">首页</view>
   </view>
   <view class="action" bindtap="NavChange" data-cur="releaseItem">
     <view class='cuIcon-cu-image'>
-      <image src="/images/tabbar/component{{PageCur=='releaseItem'?'_cur':''}}.png"></image>
+      <text class="cuIcon-form {{PageCur=='releaseItem'?'text-green':'text-grey'}}"></text>
     </view>
     <view class="{{PageCur=='releaseItem'?'text-green':'text-gray'}}">发布</view>
   </view>
   <view class="action" bindtap="NavChange" data-cur="individualCenter">
     <view class='cuIcon-cu-image'>
-      <image src="/images/tabbar/about{{PageCur=='individualCenter'?'_cur':''}}.png"></image>
+      <text class="cuIcon-people {{PageCur=='individualCenter'?'text-green':'text-grey'}}"></text>
     </view>
     <view class="{{PageCur=='individualCenter'?'text-green':'text-gray'}}">个人中心</view>
   </view>
