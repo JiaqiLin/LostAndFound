@@ -1,0 +1,17 @@
+<!--pages/individualCenter/uploadExcel.wxml-->
+<cu-custom bgColor="bg-white">
+  <view slot="content">上传文件</view>
+</cu-custom>
+<view class="margin-xl  bg-white radius shadow shadow-lg">
+  <view class="flex justify-center">
+    <view>
+      <button bindtap="uploadExcel" class='cu-btn round bg-green shadow'> 上传文件 </button>
+    </view>
+    <view>
+      <text>{{fileName}}</text>
+    </view>
+    <view>
+      <button bindtap="readExcel" class='cu-btn round bg-green shadow'> 读取文件 </button>
+    </view>
+  </view>
+</view>
