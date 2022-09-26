@@ -6,7 +6,8 @@
     "pages/releaseItem/releaseItem",
     "pages/individualCenter/home/home",
     "pages/individualCenter/individualInfo/individualInfo",
-    "pages/individualCenter/checkItem/checkItem"
+    "pages/individualCenter/checkItem/checkItem",
+    "pages/individualCenter/uploadExcel/uploadExcel"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -18,7 +19,7 @@
   },
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom",
-    "tabbar":"/components/tabbar/tabbar"
+    "tabbar": "/components/tabbar/tabbar"
   },
   "sitemapLocation": "sitemap.json"
 }

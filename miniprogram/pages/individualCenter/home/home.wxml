@@ -23,5 +23,12 @@
       <text class="text-grey">注销（测试使用，清除本地缓存）</text>
     </button>
   </view> -->
+  <view class="cu-item arrow">
+    <navigator class="content" url="/pages/individualCenter/uploadExcel/uploadExcel" hover-class="none">
+      <text class="cuIcon-write text-green"></text>
+      <text class="text-grey">导入excel</text>
+    </navigator>
+  </view>
 </view>
+
 <tabbar PageCur="individualCenter"></tabbar>
